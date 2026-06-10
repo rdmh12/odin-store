@@ -8,7 +8,7 @@ export default function Shop() {
   return (
     <>
       <h1>Shop</h1>
-      <div className={styles.content}>
+      <div className={styles.content} data-testid="shop-products">
         {products.length && products.map((product) =>
           <Product key={product.id} product={product} />
         )}
