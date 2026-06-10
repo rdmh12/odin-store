@@ -1,19 +1,18 @@
 import { useLoaderData } from "react-router-dom";
+import Product from "./Product.jsx";
+import styles from "./Shop.module.css";
 
 export default function Shop() {
-	const { products } = useLoaderData();
+  const { products } = useLoaderData();
 
   return (
-		<>
-			<h1>Shop</h1>
-			{products.length && products.map((product) =>
-				<div>
-					<div>{product.title}</div>
-					<div>{product.price}</div>
-					<div>{product.description}</div>
-					<img src={product.image} alt={product.title} />
-				</div>
-			)}
-		</>
-	);
+    <>
+      <h1>Shop</h1>
+      <div className={styles.content}>
+        {products.length && products.map((product) =>
+          <Product key={product.id} product={product} />
+        )}
+      </div>
+    </>
+  );
 }
