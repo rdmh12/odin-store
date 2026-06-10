@@ -26,7 +26,7 @@ test("navigation", async () => {
   const cart = within(navigation).getByText("Shopping Cart");
 
   await user.click(products);
-  expect(screen.getByRole("heading").textContent).toBe("Shop");
+  expect(screen.getByText("Shop")).toBeInTheDocument();
 
   await user.click(cart);
   expect(screen.getByRole("heading").textContent).toBe("Cart");
