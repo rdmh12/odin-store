@@ -4,7 +4,6 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>Store</h1>
         <nav>
           <ul>
             <li>
