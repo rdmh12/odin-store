@@ -1,6 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function App() {
+  const [cart, setCart] = useState(new Map());
+
   return (
     <>
       <header>
@@ -19,7 +22,7 @@ export default function App() {
         </nav>
       </header>
       <main>
-        <Outlet />
+        <Outlet context={[cart, setCart]} />
       </main>
     </>
   );

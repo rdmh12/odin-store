@@ -8,3 +8,8 @@
 		width: 75%;
 	}
 }
+
+.buttons {
+	display: flex;
+	gap: 1em;
+}
