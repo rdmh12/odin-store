@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
+import ShoppingCartIcon from "./ShoppingCartIcon.jsx";
 
 export default function App() {
   const [cart, setCart] = useState(new Map());
@@ -16,7 +17,7 @@ export default function App() {
               <Link to="/shop">Products</Link>
             </li>
             <li>
-              <Link to="/cart">Shopping Cart</Link>
+              <ShoppingCartIcon amount={cart.size} />
             </li>
           </ul>
         </nav>

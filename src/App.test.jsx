@@ -23,7 +23,7 @@ test("navigation", async () => {
   const navigation = screen.getByRole("navigation");
   const home = within(navigation).getByText("Home");
   const products = within(navigation).getByText("Products");
-  const cart = within(navigation).getByText("Shopping Cart");
+  const cart = within(navigation).getByText("Shopping Cart (0)");
 
   await user.click(products);
   expect(screen.getByText("Shop")).toBeInTheDocument();
