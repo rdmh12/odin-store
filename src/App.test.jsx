@@ -29,7 +29,7 @@ test("navigation", async () => {
   expect(screen.getByText("Shop")).toBeInTheDocument();
 
   await user.click(cart);
-  expect(screen.getByRole("heading").textContent).toBe("Cart");
+  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
 
   await user.click(home);
   expect(screen.getByRole("heading").textContent).toBe("Home");

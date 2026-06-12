@@ -6,25 +6,32 @@ export default function Shop() {
   const { products } = useLoaderData();
   const [cart, setCart] = useOutletContext();
 
-  const amountDecreasedHandler = (productId) => {
-    if (cart.has(productId)) {
+  const amountDecreasedHandler = (product) => {
+    if (cart.has(product.id)) {
       const newCart = new Map(cart);
-      const amount = newCart.get(productId);
+      const entry = newCart.get(product.id);
 
-      if (amount == 1) {
-        newCart.delete(productId);
+      if (entry.amount == 1) {
+        newCart.delete(product.id);
       } else {
-        newCart.set(productId, amount - 1);
+        newCart.set(product.id, { ...entry, amount: entry.amount - 1 });
       }
 
       setCart(newCart);
     }
   };
 
-  const amountIncreasedHandler = (productId) => {
+  const amountIncreasedHandler = (product) => {
     const newCart = new Map(cart);
-    const amount = newCart.get(productId) ?? 0;
-    newCart.set(productId, amount + 1);
+
+    const entry = newCart.get(product.id);
+
+    if (entry) {
+      newCart.set(product.id, { ...entry, amount: entry.amount + 1 });
+    } else {
+      newCart.set(product.id, { product, amount: 1 });
+    }
+
     setCart(newCart);
   };
 
@@ -33,19 +40,23 @@ export default function Shop() {
       <h1>Shop</h1>
       <div className={styles.content} data-testid="shop-products">
         {products.length &&
-          products.map((product) => (
-            <Product
-              key={product.id}
-              product={product}
-              amount={cart.get(product.id) ?? 0}
-              onAmountDecreased={() => {
-                amountDecreasedHandler(product.id);
-              }}
-              onAmountIncreased={() => {
-                amountIncreasedHandler(product.id);
-              }}
-            />
-          ))}
+          products.map((product) => {
+            const entry = cart.get(product.id);
+            const amount = entry ? entry.amount : 0;
+            return (
+              <Product
+                key={product.id}
+                product={product}
+                amount={amount}
+                onAmountDecreased={() => {
+                  amountDecreasedHandler(product);
+                }}
+                onAmountIncreased={() => {
+                  amountIncreasedHandler(product);
+                }}
+              />
+            );
+          })}
       </div>
     </>
   );
