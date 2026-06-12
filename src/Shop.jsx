@@ -38,8 +38,12 @@ export default function Shop() {
               key={product.id}
               product={product}
               amount={cart.get(product.id) ?? 0}
-              onAmountDecreased={() => { amountDecreasedHandler(product.id); }}
-              onAmountIncreased={() => { amountIncreasedHandler(product.id); }}
+              onAmountDecreased={() => {
+                amountDecreasedHandler(product.id);
+              }}
+              onAmountIncreased={() => {
+                amountIncreasedHandler(product.id);
+              }}
             />
           ))}
       </div>

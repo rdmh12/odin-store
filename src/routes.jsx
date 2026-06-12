@@ -16,7 +16,7 @@ const routes = [
       {
         path: "/shop",
         element: <Shop />,
-				loader: shopLoader,
+        loader: shopLoader,
       },
       {
         path: "/cart",

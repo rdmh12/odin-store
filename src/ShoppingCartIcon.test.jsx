@@ -8,21 +8,21 @@ test("renders correctly", () => {
   const { rerender } = render(
     <MemoryRouter>
       <ShoppingCartIcon amount={0} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   expect(screen.getByRole("link").textContent).toEqual("Shopping Cart (0)");
 
   rerender(
     <MemoryRouter>
       <ShoppingCartIcon amount={1} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   expect(screen.getByRole("link").textContent).toEqual("Shopping Cart (1)");
 
   rerender(
     <MemoryRouter>
       <ShoppingCartIcon amount={123} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   expect(screen.getByRole("link").textContent).toEqual("Shopping Cart (123)");
 });

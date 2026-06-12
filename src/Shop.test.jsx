@@ -6,7 +6,9 @@ import products from "./debug-products.js";
 
 test("renders products", async () => {
   let cart = new Map();
-	const setCart = (newCart) => { cart = newCart};
+  const setCart = (newCart) => {
+    cart = newCart;
+  };
 
   const Stub = createRoutesStub([
     {
