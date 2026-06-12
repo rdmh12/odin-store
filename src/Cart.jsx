@@ -1,9 +1,22 @@
 import { useOutletContext } from "react-router-dom";
+import ShoppingCart from "./ShoppingCart.js";
 
 export default function Cart() {
-  const [cart] = useOutletContext();
+  const [cart, setCart] = useOutletContext();
 
   if (cart.size == 0) return <h2>Your cart is empty.</h2>;
+
+  const decrementHandler = (product) => {
+    const newCart = new ShoppingCart(cart);
+    newCart.decreaseAmount(product);
+    setCart(newCart);
+  };
+
+  const incrementHandler = (product) => {
+    const newCart = new ShoppingCart(cart);
+    newCart.increaseAmount(product);
+    setCart(newCart);
+  };
 
   return (
     <>
@@ -13,8 +26,18 @@ export default function Cart() {
       {cart.map((product, amount) => (
         <div key={product.id} data-testid="cart-entry">
           <h2>{product.title}</h2>
-          <div data-testid="cart-entry-amount">{amount}</div>
-          <div data-testid="cart-entry-price">{product.price * amount}</div>
+          <div>
+            <button type="button" onClick={() => decrementHandler(product)}>
+              Decrement
+            </button>
+            <span data-testid="cart-entry-amount">{amount}</span>
+            <button type="button" onClick={() => incrementHandler(product)}>
+              Increment
+            </button>
+          </div>
+          <div data-testid="cart-entry-price">
+            {(product.price * amount).toFixed(2)}
+          </div>
         </div>
       ))}
     </>

@@ -1,18 +1,14 @@
 import { test, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { createRoutesStub, Outlet } from "react-router-dom";
+import { useState } from "react";
 import Cart from "./Cart.jsx";
 import products from "./debug-products.js";
 import ShoppingCart from "./ShoppingCart.js";
 
 test("renders no items when cart is empty", () => {
-  // let cart = new Map();
-  // const setCart = (newCart) => {
-  //   cart = newCart;
-  // };
-
-  const cart = new ShoppingCart();
-  const { Stub } = createStub(cart);
+  const Stub = createStub(new ShoppingCart());
 
   render(<Stub />);
 
@@ -28,8 +24,7 @@ test("renders list of items in cart", () => {
   cart.increaseAmount(products[3]);
   cart.increaseAmount(products[6]);
 
-  // eslint-disable-next-line no-unused-vars
-  const { Stub, context } = createStub(cart);
+  const Stub = createStub(cart);
 
   render(<Stub />);
 
@@ -42,6 +37,12 @@ test("renders list of items in cart", () => {
     const entry = entries[index];
 
     expect(within(entry).getByRole("heading").textContent).toBe(product.title);
+    expect(
+      within(entry).queryByRole("button", { name: "Decrement" }),
+    ).toBeInTheDocument();
+    expect(
+      within(entry).queryByRole("button", { name: "Increment" }),
+    ).toBeInTheDocument();
     expect(within(entry).getByTestId("cart-entry-amount").textContent).toBe(
       String(amount),
     );
@@ -58,8 +59,7 @@ test("renders correct total price of items in cart", () => {
   cart.increaseAmount(products[3]);
   cart.increaseAmount(products[6]);
 
-  // eslint-disable-next-line no-unused-vars
-  const { Stub, context } = createStub(cart);
+  const Stub = createStub(cart);
 
   render(<Stub />);
 
@@ -68,17 +68,62 @@ test("renders correct total price of items in cart", () => {
   );
 });
 
-function createStub(cart) {
-  const context = {};
-  context.value = cart;
-  context.setValue = (newValue) => {
-    context.value = newValue;
-  };
+test("increment/decrement buttons update amount items in cart", async () => {
+  const cart = new ShoppingCart();
+  cart.increaseAmount(products[0]);
+  cart.increaseAmount(products[3]);
+  cart.increaseAmount(products[3]);
+  cart.increaseAmount(products[6]);
 
+  const user = userEvent.setup();
+
+  const Stub = createStub(cart);
+
+  render(<Stub />);
+
+  const amount = screen.getAllByTestId("cart-entry-amount");
+  const decrement = screen.getAllByRole("button", { name: "Decrement" });
+  const increment = screen.getAllByRole("button", { name: "Increment" });
+  const price = screen.getAllByTestId("cart-entry-price");
+
+  expect(amount[0].textContent).toBe("1");
+  await user.click(increment[0]);
+  expect(amount[0].textContent).toBe("2");
+  expect(price[0].textContent).toBe((products[0].price * 2).toFixed(2));
+
+  await user.click(decrement[1]);
+  expect(amount[1].textContent).toBe("1");
+  expect(price[1].textContent).toBe((products[3].price * 1).toFixed(2));
+
+  await user.click(decrement[1]);
+  expect(
+    screen.queryByRole("heading", { name: products[1].title }),
+  ).not.toBeInTheDocument();
+  expect(amount[1]).not.toBeInTheDocument();
+  expect(decrement[1]).not.toBeInTheDocument();
+  expect(increment[1]).not.toBeInTheDocument();
+
+  await user.click(decrement[0]);
+  await user.click(decrement[0]);
+  await user.click(decrement[2]);
+  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
+});
+
+test("increment/decrement buttons update total price", async () => {
+  // TODO: implement
+});
+
+function TestOutlet({ initialCart }) {
+  const [cart, setCart] = useState(initialCart);
+
+  return <Outlet context={[cart, setCart]} />;
+}
+
+function createStub(initialCart) {
   const Stub = createRoutesStub([
     {
       path: "/",
-      Component: () => <Outlet context={[context.value, context.setValue]} />,
+      Component: () => <TestOutlet initialCart={initialCart} />,
       children: [
         {
           index: true,
@@ -88,5 +133,5 @@ function createStub(cart) {
     },
   ]);
 
-  return { Stub, context };
+  return Stub;
 }
