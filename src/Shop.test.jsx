@@ -3,9 +3,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { createRoutesStub, Outlet } from "react-router-dom";
 import Shop from "./Shop.jsx";
 import products from "./debug-products.js";
+import ShoppingCart from "./ShoppingCart.js";
 
 test("renders products", async () => {
-  let cart = new Map();
+  let cart = new ShoppingCart();
   const setCart = (newCart) => {
     cart = newCart;
   };

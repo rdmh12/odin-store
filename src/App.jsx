@@ -1,9 +1,10 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
 import ShoppingCartIcon from "./ShoppingCartIcon.jsx";
+import ShoppingCart from "./ShoppingCart.js";
 
 export default function App() {
-  const [cart, setCart] = useState(new Map());
+  const [cart, setCart] = useState(new ShoppingCart());
 
   return (
     <>

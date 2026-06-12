@@ -5,15 +5,12 @@ export default function Cart() {
 
   if (cart.size == 0) return <h2>Your cart is empty.</h2>;
 
-  const totalPrice = cart
-    .values()
-    .reduce((accum, { product, amount }) => accum + product.price * amount, 0)
-    .toFixed(2);
-
   return (
     <>
-      <div data-testid="cart-total">Total price: {totalPrice}</div>
-      {[...cart.values()].map(({ product, amount }) => (
+      <div data-testid="cart-total">
+        Total price: {cart.getTotalPrice().toFixed(2)}
+      </div>
+      {cart.map((product, amount) => (
         <div key={product.id} data-testid="cart-entry">
           <h2>{product.title}</h2>
           <div data-testid="cart-entry-amount">{amount}</div>
