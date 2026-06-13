@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { createRoutesStub, Outlet } from "react-router-dom";
 import { useState } from "react";
 import Cart from "./Cart.jsx";
+import Checkout from "./Checkout.jsx";
 import products from "./debug-products.js";
 import ShoppingCart from "./ShoppingCart.js";
 
@@ -12,9 +13,11 @@ test("renders no items when cart is empty", () => {
 
   render(<Stub />);
 
-  const empty = screen.queryByRole("heading", { name: "Your cart is empty." });
+  const headings = screen.queryAllByRole("heading");
 
-  expect(empty).toBeInTheDocument();
+  expect(headings.length).toBe(1);
+  expect(headings[0].textContent).toBe("Your cart is empty.");
+  expect(screen.queryAllByRole("button").length).toBe(0);
 });
 
 test("renders list of items in cart", () => {
@@ -48,6 +51,10 @@ test("renders list of items in cart", () => {
       String(product.price * amount),
     );
   });
+
+  expect(
+    screen.queryByRole("button", { name: "Checkout" }),
+  ).toBeInTheDocument();
 });
 
 test("renders correct total price of items in cart", () => {
@@ -168,6 +175,24 @@ test("changing items in cart updates total price", async () => {
   expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
 });
 
+test("checkout button shows 'Checkout completed' message", async () => {
+  const cart = createCart();
+  const user = userEvent.setup();
+
+  const Stub = createStub(cart);
+
+  render(<Stub />);
+
+  const checkout = screen.getByRole("button", { name: "Checkout" });
+
+  await user.click(checkout);
+
+  expect(
+    screen.queryByRole("heading", { name: "Checkout completed!" }),
+  ).toBeInTheDocument();
+  expect(checkout).not.toBeInTheDocument();
+});
+
 function TestOutlet({ initialCart }) {
   const [cart, setCart] = useState(initialCart);
 
@@ -183,6 +208,10 @@ function createStub(initialCart) {
         {
           index: true,
           Component: Cart,
+        },
+        {
+          path: "/checkout",
+          Component: Checkout,
         },
       ],
     },

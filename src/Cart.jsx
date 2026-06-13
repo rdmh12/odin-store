@@ -1,8 +1,9 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart.js";
 
 export default function Cart() {
   const [cart, setCart] = useOutletContext();
+  const navigate = useNavigate();
 
   if (cart.size == 0) return <h2>Your cart is empty.</h2>;
 
@@ -24,11 +25,19 @@ export default function Cart() {
     setCart(newCart);
   };
 
+  const checkoutHandler = () => {
+    setCart(new ShoppingCart());
+    navigate("/checkout", { state: { message: "Checkout completed!" } });
+  };
+
   return (
     <>
       <div data-testid="cart-total">
         Total price: {cart.getTotalPrice().toFixed(2)}
       </div>
+      <button type="button" onClick={checkoutHandler}>
+        Checkout
+      </button>
       {cart.map((product, amount) => (
         <div key={product.id} data-testid="cart-entry">
           <h2>{product.title}</h2>

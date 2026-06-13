@@ -2,6 +2,7 @@ import App from "./App.jsx";
 import Home from "./Home.jsx";
 import Shop from "./Shop.jsx";
 import Cart from "./Cart.jsx";
+import Checkout from "./Checkout.jsx";
 import shopLoader from "./Shop.loader.js";
 
 const routes = [
@@ -21,6 +22,10 @@ const routes = [
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },
