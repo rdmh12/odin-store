@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import ShoppingCartIcon from "./ShoppingCartIcon.jsx";
 import ShoppingCart from "./ShoppingCart.js";
@@ -9,14 +9,22 @@ export default function App() {
   return (
     <>
       <header>
+        <Link to="/" className="logo">
+          the store
+        </Link>
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <NavLink to="/" className="nav-link nav-home">
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to="/shop">Products</Link>
+              <NavLink to="/shop" className="nav-link">
+                Products
+              </NavLink>
             </li>
+            <li className="stretcher" role="none"></li>
             <li>
               <ShoppingCartIcon amount={cart.size} />
             </li>

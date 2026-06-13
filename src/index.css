@@ -1,9 +1,88 @@
+@import "./colors.jss";
+
+:root {
+  --header-height: 65px;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: system-ui, sans-serif;
 }
 
 #root {
-  padding: 1em;
+  background-color: var(--root-bg);
+}
+
+header {
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--border);
+  gap: 1em;
+  position: fixed;
+  width: 100%;
+  height: var(--header-height);
+  top: 0;
+}
+
+main {
+  margin-top: var(--header-height);
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--title-fg);
+  text-decoration: none;
+  display: block;
+}
+
+nav {
+  flex: 1;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+.nav-link {
+  padding: 0.5em 1em;
+  display: block;
+  font-weight: 500;
+}
+
+.nav-link:visited {
+  color: var(--nav-fg);
+}
+
+.nav-link:hover {
+  color: var(--nav-fg-hover);
+  background-color: var(--nav-bg-hover);
+  transition: background-color 300ms;
+}
+
+.nav-link.active {
+  color: var(--nav-fg-hover);
+  background-color: var(--nav-bg-hover);
+}
+
+.stretcher {
+  flex: 1;
+}
+
+@media (orientation: portrait) {
+  .nav-home {
+    display: none;
+  }
 }

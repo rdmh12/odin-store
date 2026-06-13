@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import routes from "./routes.jsx";
 
@@ -20,17 +20,16 @@ test("navigation", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const navigation = screen.getByRole("navigation");
-  const home = within(navigation).getByText("Home");
-  const products = within(navigation).getByText("Products");
-  const cart = within(navigation).getByText("Shopping Cart (0)");
+  const home = screen.getByRole("link", { name: "Home" });
+  const products = screen.getByRole("link", { name: "Products" });
+  const cart = screen.getByRole("link", { name: "0 items in cart" });
 
   await user.click(products);
-  expect(screen.getByText("Shop")).toBeInTheDocument();
+  expect(screen.queryByText("Shop")).toBeInTheDocument();
 
   await user.click(cart);
-  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
+  expect(screen.queryByRole("heading").textContent).toBe("Your cart is empty.");
 
   await user.click(home);
-  expect(screen.getByRole("heading").textContent).toBe("Home");
+  expect(screen.queryByRole("heading").textContent).toBe("Home");
 });

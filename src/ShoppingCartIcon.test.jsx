@@ -10,19 +10,19 @@ test("renders correctly", () => {
       <ShoppingCartIcon amount={0} />
     </MemoryRouter>,
   );
-  expect(screen.getByRole("link").textContent).toEqual("Shopping Cart (0)");
+  expect(screen.getByRole("link").textContent).toEqual("");
 
   rerender(
     <MemoryRouter>
       <ShoppingCartIcon amount={1} />
     </MemoryRouter>,
   );
-  expect(screen.getByRole("link").textContent).toEqual("Shopping Cart (1)");
+  expect(screen.getByRole("link").textContent).toEqual("1");
 
   rerender(
     <MemoryRouter>
       <ShoppingCartIcon amount={123} />
     </MemoryRouter>,
   );
-  expect(screen.getByRole("link").textContent).toEqual("Shopping Cart (123)");
+  expect(screen.getByRole("link").textContent).toEqual("123");
 });
