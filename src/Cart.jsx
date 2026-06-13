@@ -18,6 +18,12 @@ export default function Cart() {
     setCart(newCart);
   };
 
+  const removeHandler = (productId) => {
+    const newCart = new ShoppingCart(cart);
+    newCart.remove(productId);
+    setCart(newCart);
+  };
+
   return (
     <>
       <div data-testid="cart-total">
@@ -33,6 +39,9 @@ export default function Cart() {
             <span data-testid="cart-entry-amount">{amount}</span>
             <button type="button" onClick={() => incrementHandler(product)}>
               Increment
+            </button>
+            <button type="button" onClick={() => removeHandler(product.id)}>
+              Remove
             </button>
           </div>
           <div data-testid="cart-entry-price">

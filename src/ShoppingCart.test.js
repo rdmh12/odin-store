@@ -100,3 +100,23 @@ test("map", () => {
     [products[6].id, 1],
   ]);
 });
+
+test("removes item from cart", () => {
+  const cart = new ShoppingCart();
+  cart.increaseAmount(products[0]);
+  cart.increaseAmount(products[3]);
+  cart.increaseAmount(products[3]);
+  cart.increaseAmount(products[6]);
+
+  cart.remove(products[3].id);
+  expect(cart.size).toBe(2);
+  expect(cart.getAmount(products[3].id)).toBe(0);
+
+  cart.remove(products[6].id);
+  expect(cart.size).toBe(1);
+  expect(cart.getAmount(products[6].id)).toBe(0);
+
+  cart.remove(products[0].id);
+  expect(cart.size).toBe(0);
+  expect(cart.getAmount(products[0].id)).toBe(0);
+});

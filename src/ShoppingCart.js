@@ -54,4 +54,8 @@ export default class ShoppingCart {
 
     return result;
   }
+
+  remove(productId) {
+    this.#items.delete(productId);
+  }
 }

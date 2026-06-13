@@ -18,12 +18,7 @@ test("renders no items when cart is empty", () => {
 });
 
 test("renders list of items in cart", () => {
-  const cart = new ShoppingCart();
-  cart.increaseAmount(products[0]);
-  cart.increaseAmount(products[3]);
-  cart.increaseAmount(products[3]);
-  cart.increaseAmount(products[6]);
-
+  const cart = createCart();
   const Stub = createStub(cart);
 
   render(<Stub />);
@@ -43,6 +38,9 @@ test("renders list of items in cart", () => {
     expect(
       within(entry).queryByRole("button", { name: "Increment" }),
     ).toBeInTheDocument();
+    expect(
+      within(entry).queryByRole("button", { name: "Remove" }),
+    ).toBeInTheDocument();
     expect(within(entry).getByTestId("cart-entry-amount").textContent).toBe(
       String(amount),
     );
@@ -53,12 +51,7 @@ test("renders list of items in cart", () => {
 });
 
 test("renders correct total price of items in cart", () => {
-  const cart = new ShoppingCart();
-  cart.increaseAmount(products[0]);
-  cart.increaseAmount(products[3]);
-  cart.increaseAmount(products[3]);
-  cart.increaseAmount(products[6]);
-
+  const cart = createCart();
   const Stub = createStub(cart);
 
   render(<Stub />);
@@ -69,12 +62,7 @@ test("renders correct total price of items in cart", () => {
 });
 
 test("increment/decrement buttons update amount items in cart", async () => {
-  const cart = new ShoppingCart();
-  cart.increaseAmount(products[0]);
-  cart.increaseAmount(products[3]);
-  cart.increaseAmount(products[3]);
-  cart.increaseAmount(products[6]);
-
+  const cart = createCart();
   const user = userEvent.setup();
 
   const Stub = createStub(cart);
@@ -109,6 +97,30 @@ test("increment/decrement buttons update amount items in cart", async () => {
   expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
 });
 
+test("remove buttons removes the item from cart", async () => {
+  const cart = createCart();
+  const user = userEvent.setup();
+
+  const Stub = createStub(cart);
+
+  render(<Stub />);
+
+  const remove = screen.getAllByRole("button", { name: "Remove" });
+
+  await user.click(remove[1]);
+  expect(
+    screen.queryByRole("heading", { name: products[3].title }),
+  ).not.toBeInTheDocument();
+
+  await user.click(remove[2]);
+  expect(
+    screen.queryByRole("heading", { name: products[6].title }),
+  ).not.toBeInTheDocument();
+
+  await user.click(remove[0]);
+  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
+});
+
 test("increment/decrement buttons update total price", async () => {
   // TODO: implement
 });
@@ -134,4 +146,14 @@ function createStub(initialCart) {
   ]);
 
   return Stub;
+}
+
+function createCart() {
+  const cart = new ShoppingCart();
+  cart.increaseAmount(products[0]);
+  cart.increaseAmount(products[3]);
+  cart.increaseAmount(products[3]);
+  cart.increaseAmount(products[6]);
+
+  return cart;
 }
