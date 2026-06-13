@@ -1,4 +1,4 @@
-import { test, expect, vi } from "vitest";
+import { test, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { createRoutesStub, Outlet } from "react-router-dom";
 import Shop from "./Shop.jsx";
