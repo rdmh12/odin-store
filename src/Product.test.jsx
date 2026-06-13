@@ -12,14 +12,16 @@ test("renders product information", () => {
   const image = screen.getByRole("img");
   const title = screen.getByRole("heading");
   const price = screen.getByText(product.price);
-  const description = screen.getByText(product.description);
+  const rating = screen.getByTestId("product-rating");
   const button = screen.getByRole("button");
 
   expect(image).toHaveAttribute("src", product.image);
   expect(image).toHaveAttribute("alt", product.title);
   expect(title.textContent).toBe(product.title);
-  expect(price).toBeInTheDocument();
-  expect(description).toBeInTheDocument();
+  expect(price.textContent).toBe(product.price.toFixed(2));
+  expect(rating.textContent).toBe(
+    `${product.rating.rate}(${product.rating.count})`,
+  );
   expect(button.textContent).toBe("Add to cart");
 });
 

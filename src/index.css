@@ -30,6 +30,7 @@ header {
 
 main {
   margin-top: var(--header-height);
+  padding: 1em;
 }
 
 .logo {

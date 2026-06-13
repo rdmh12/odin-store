@@ -1,15 +1,94 @@
-.card {
+:root {
+  --button-height: 36px;
+  --amount-button-radius: 6px;
+}
+
+.container {
   border: 1px solid grey;
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   align-items: center;
+  background-color: #fff;
+  padding: 1em;
+  border: 1px solid var(--border);
+  /* border-radius: 8px; */
+  box-shadow: 3px 3px 3px #e0e0e0;
+}
 
-  img {
-    width: 75%;
-  }
+img {
+  width: 45%;
+}
+
+h2 {
+  font-size: 1rem;
+  text-align: center;
 }
 
 .buttons {
   display: flex;
-  gap: 1em;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.rating {
+  display: flex;
+  gap: 0.25em;
+  font-size: 0.8rem;
+}
+
+.ratingCount {
+  color: var(--subtle);
+}
+
+.addButton,
+.amountButton {
+  height: var(--button-height);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.addButton {
+  background-color: #000;
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+  padding: 0 1em;
+}
+
+.addButton:hover {
+  background-color: #666;
+  transition: background-color 250ms;
+}
+
+.amountButton {
+  background: none;
+  border: 1px solid var(--border);
+  width: var(--button-height);
+  justify-content: center;
+}
+
+.amountButtonDecrement {
+  border-radius: var(--amount-button-radius) 0 0 var(--amount-button-radius);
+}
+
+.amountButtonIncrement {
+  border-radius: 0 var(--amount-button-radius) var(--amount-button-radius) 0;
+}
+
+.amount {
+  font-size: 1rem;
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  width: var(--button-height);
+  height: var(--button-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
