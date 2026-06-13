@@ -33,13 +33,13 @@ test("increases/decreases item amount", () => {
   expect(cart.getAmount(products[2].id)).toBe(0);
 
   cart.increaseAmount(products[0]);
-  expect(cart.size).toBe(1);
+  expect(cart.size).toBe(2);
   expect(cart.getAmount(products[0].id)).toBe(2);
   expect(cart.getAmount(products[1].id)).toBe(0);
   expect(cart.getAmount(products[2].id)).toBe(0);
 
   cart.increaseAmount(products[1]);
-  expect(cart.size).toBe(2);
+  expect(cart.size).toBe(3);
   expect(cart.getAmount(products[0].id)).toBe(2);
   expect(cart.getAmount(products[1].id)).toBe(1);
   expect(cart.getAmount(products[2].id)).toBe(0);
@@ -51,7 +51,7 @@ test("increases/decreases item amount", () => {
   expect(cart.getAmount(products[2].id)).toBe(0);
 
   cart.increaseAmount(products[0]);
-  expect(cart.size).toBe(2);
+  expect(cart.size).toBe(3);
   expect(cart.getAmount(products[0].id)).toBe(2);
   expect(cart.getAmount(products[1].id)).toBe(1);
   expect(cart.getAmount(products[2].id)).toBe(0);

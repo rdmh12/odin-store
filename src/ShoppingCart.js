@@ -10,7 +10,7 @@ export default class ShoppingCart {
   }
 
   get size() {
-    return this.#items.size;
+		return this.#items.values().reduce((accum, {amount}) => accum + amount, 0);
   }
 
   decreaseAmount(product) {
