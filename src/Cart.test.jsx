@@ -121,8 +121,51 @@ test("remove buttons removes the item from cart", async () => {
   expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
 });
 
-test("increment/decrement buttons update total price", async () => {
-  // TODO: implement
+test("changing items in cart updates total price", async () => {
+  const cart = createCart();
+  const user = userEvent.setup();
+
+  const Stub = createStub(cart);
+
+  render(<Stub />);
+
+  const decrement = screen.getAllByRole("button", { name: "Decrement" });
+  const increment = screen.getAllByRole("button", { name: "Increment" });
+  const remove = screen.getAllByRole("button", { name: "Remove" });
+  const total = screen.getByTestId("cart-total");
+
+  {
+    await user.click(increment[1]);
+    const price = `Total price: ${(products[0].price + products[3].price * 3 + products[6].price).toFixed(2)}`;
+    expect(total.textContent).toBe(price);
+  }
+
+  {
+    await user.click(decrement[2]);
+    const price = `Total price: ${(products[0].price + products[3].price * 3).toFixed(2)}`;
+    expect(total.textContent).toBe(price);
+  }
+
+  {
+    await user.click(increment[0]);
+    const price = `Total price: ${(products[0].price * 2 + products[3].price * 3).toFixed(2)}`;
+    expect(total.textContent).toBe(price);
+  }
+
+  {
+    await user.click(decrement[0]);
+    const price = `Total price: ${(products[0].price + products[3].price * 3).toFixed(2)}`;
+    expect(total.textContent).toBe(price);
+  }
+
+  {
+    await user.click(decrement[0]);
+    const price = `Total price: ${(products[3].price * 3).toFixed(2)}`;
+    expect(total.textContent).toBe(price);
+  }
+
+  await user.click(remove[1]);
+  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
 });
 
 function TestOutlet({ initialCart }) {
