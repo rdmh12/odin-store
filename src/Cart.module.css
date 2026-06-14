@@ -41,7 +41,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
 }
 
 .entry {
@@ -53,6 +53,7 @@
 
 .productImage {
   width: 80px;
+  height: 80px;
   object-fit: scale-down;
 }
 
@@ -75,10 +76,11 @@
   margin-bottom: 0.7em;
 }
 
-h2 {
+.entryHeader h2 {
   text-align: start;
   flex: 1;
   font-weight: 500;
+	font-size: 1.1rem;
 }
 
 .entryButtons {

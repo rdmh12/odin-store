@@ -30,8 +30,7 @@ export default function Product({
 
   return (
     <div className={styles.container}>
-      <img src={product.image} alt={product.title} />
-      <div className="stretcher"></div>
+      <img src={product.image} alt={product.title} className={styles.productImage} />
       <div className={styles.rating}>
         <span aria-hidden="true" data-testid="product-rating">
           {product.rating.rate}
@@ -49,6 +48,7 @@ export default function Product({
         <span className="sr-only">{`${product.rating.count} ratings`}</span>
       </div>
       <h2>{product.title}</h2>
+      <div className="stretch"></div>
       <div className={styles.price}>{product.price.toFixed(2)}</div>
       {amount ? (
         <AmountButtons

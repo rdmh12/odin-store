@@ -16,11 +16,13 @@
   box-shadow: 3px 3px 3px #e0e0e0;
 }
 
-img {
-  width: 45%;
+.productImage {
+  width: 180px;
+  height: 180px;
+	object-fit: scale-down;
 }
 
-h2 {
+.container h2 {
   font-size: 1rem;
   text-align: center;
 }
