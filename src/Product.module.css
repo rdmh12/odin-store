@@ -19,7 +19,7 @@
 .productImage {
   width: 180px;
   height: 180px;
-	object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .container h2 {

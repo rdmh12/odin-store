@@ -10,7 +10,7 @@ export default function Cart() {
   let checkout;
 
   if (cart.size == 0) {
-    content = <h2>Your cart is empty.</h2>;
+    content = <h2 className={styles.emptyMessage}>Your cart is empty.</h2>;
     checkout = "";
   } else {
     const decrementHandler = (product) => {

@@ -17,20 +17,30 @@ export default function Product({
   let index = 0;
 
   for (let count = 0; count < fullStars; count++) {
-    stars[index++] = <img key={index} src={starFull} alt="" className={styles.star} />;
+    stars[index++] = (
+      <img key={index} src={starFull} alt="" className={styles.star} />
+    );
   }
 
   if (halfStar) {
-    stars[index++] = <img key={index} src={starHalf} alt="" className={styles.star} />;
+    stars[index++] = (
+      <img key={index} src={starHalf} alt="" className={styles.star} />
+    );
   }
 
   for (let count = 0; count < emptyStars; count++) {
-    stars[index++] = <img key={index} src={starEmpty} alt="" className={styles.star} />;
+    stars[index++] = (
+      <img key={index} src={starEmpty} alt="" className={styles.star} />
+    );
   }
 
   return (
     <div className={styles.container}>
-      <img src={product.image} alt={product.title} className={styles.productImage} />
+      <img
+        src={product.image}
+        alt={product.title}
+        className={styles.productImage}
+      />
       <div className={styles.rating}>
         <span aria-hidden="true" data-testid="product-rating">
           {product.rating.rate}

@@ -80,7 +80,7 @@
   text-align: start;
   flex: 1;
   font-weight: 500;
-	font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .entryButtons {
@@ -98,4 +98,23 @@
 
 .removeButton:hover {
   text-decoration: none;
+}
+
+@media (width < 400px) {
+  .entryButtons {
+    justify-content: space-between;
+  }
+
+  .productImage {
+    width: 40px;
+    height: 40px;
+	}
+
+	.entryHeader h2 {
+		font-size: 0.9rem;
+	}
+}
+
+.emptyMessage {
+  font-size: 1rem;
 }

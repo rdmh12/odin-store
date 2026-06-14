@@ -1,24 +1,24 @@
 @import "./colors.jss";
 
 .container {
-	padding: 4em;
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .container h1 {
-	background-color: var(--red);
-	color: #fff;
-	padding: 0.5em 2em;
-	border-radius: 4px;
+  background-color: var(--red);
+  color: #fff;
+  padding: 0.5em 2em;
+  border-radius: 4px;
 }
 
 .message {
-	background-color: #fff;
-	color: #444;
-	padding: 0.5em 2em;
-	border-radius: 4px;
-	display: flex;
-	justify-content: center;
+  background-color: #fff;
+  color: #444;
+  padding: 0.5em 2em;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
 }
