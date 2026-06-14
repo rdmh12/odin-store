@@ -74,6 +74,11 @@ h2 {
   justify-content: center;
 }
 
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+}
+
 .amountButtonDecrement {
   border-radius: var(--amount-button-radius) 0 0 var(--amount-button-radius);
 }
