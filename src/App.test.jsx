@@ -28,7 +28,12 @@ test("navigation", async () => {
   // expect(screen.queryAllByRole("heading").length).toBe(20);
 
   await user.click(cart);
-  expect(screen.queryByRole("heading").textContent).toBe("Your cart is empty.");
+  expect(
+    screen.queryByRole("heading", { name: "Shopping Cart" }),
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("heading", { name: "Your cart is empty." }),
+  ).toBeInTheDocument();
 
   await user.click(home);
   expect(screen.queryByRole("heading").textContent).toBe(

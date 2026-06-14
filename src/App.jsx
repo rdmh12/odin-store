@@ -24,7 +24,7 @@ export default function App() {
                 Products
               </NavLink>
             </li>
-            <li className="stretcher" role="none"></li>
+            <li className="stretch" role="none"></li>
             <li>
               <ShoppingCartIcon amount={cart.size} />
             </li>

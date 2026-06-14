@@ -1,7 +1,7 @@
 .buttons {
   display: flex;
   align-items: center;
-	background: #fff;
+  background: #fff;
 }
 
 .amountButton {
@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-	background: #fff;
+  background: #fff;
   border: 1px solid var(--border);
   width: var(--button-height);
   justify-content: center;

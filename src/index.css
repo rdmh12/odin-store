@@ -15,6 +15,12 @@ body {
   background-color: var(--root-bg);
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 header {
   background-color: var(--header-bg);
   display: flex;
@@ -32,10 +38,17 @@ main {
   margin-top: var(--header-height);
   padding: 1em;
   color: var(--main-fg);
+  max-width: 1300px;
+  width: 100%;
+  /* display: grid; */
+  /* justify-content: center; */
 }
 
 h1 {
   text-align: center;
+}
+
+.content {
   padding: 1em;
   background-color: #fff;
   border: 1px solid var(--border);
@@ -86,7 +99,7 @@ nav a {
   background-color: var(--nav-bg-hover);
 }
 
-.stretcher {
+.stretch {
   flex: 1;
 }
 

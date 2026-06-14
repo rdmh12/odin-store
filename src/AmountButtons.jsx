@@ -18,7 +18,9 @@ export default function AmountButtons({
       >
         <img src={amount == 1 ? trash : minus} className={styles.buttonIcon} />
       </button>
-      <div className={styles.amount}>{amount}</div>
+      <div className={styles.amount} data-testid="cart-entry-amount">
+        {amount}
+      </div>
       <button
         type="button"
         onClick={onAmountIncreased}

@@ -22,7 +22,7 @@
 .amount {
   width: 1.25em;
   height: 1.25em;
-  background-color: #ff2c2c;
+  background-color: var(--red);
   font-weight: bold;
   border-radius: 16px;
   display: flex;

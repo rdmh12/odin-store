@@ -13,10 +13,10 @@ test("renders no items when cart is empty", () => {
 
   render(<Stub />);
 
-  const headings = screen.queryAllByRole("heading");
-
-  expect(headings.length).toBe(1);
-  expect(headings[0].textContent).toBe("Your cart is empty.");
+  expect(screen.queryAllByRole("heading").length).toBe(2);
+  expect(
+    screen.queryByRole("heading", { name: "Your cart is empty." }),
+  ).toBeInTheDocument();
   expect(screen.queryAllByRole("button").length).toBe(0);
 });
 
@@ -101,7 +101,9 @@ test("increment/decrement buttons update amount items in cart", async () => {
   await user.click(decrement[0]);
   await user.click(decrement[0]);
   await user.click(decrement[2]);
-  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
+  expect(
+    screen.queryByRole("heading", { name: "Your cart is empty." }),
+  ).toBeInTheDocument();
 });
 
 test("remove buttons removes the item from cart", async () => {
@@ -125,7 +127,9 @@ test("remove buttons removes the item from cart", async () => {
   ).not.toBeInTheDocument();
 
   await user.click(remove[0]);
-  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
+  expect(
+    screen.queryByRole("heading", { name: "Your cart is empty." }),
+  ).toBeInTheDocument();
 });
 
 test("changing items in cart updates total price", async () => {
@@ -172,7 +176,9 @@ test("changing items in cart updates total price", async () => {
   }
 
   await user.click(remove[1]);
-  expect(screen.getByRole("heading").textContent).toBe("Your cart is empty.");
+  expect(
+    screen.queryByRole("heading", { name: "Your cart is empty." }),
+  ).toBeInTheDocument();
 });
 
 test("checkout button shows 'Checkout completed' message", async () => {

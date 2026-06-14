@@ -9,4 +9,6 @@
 	--nav-fg-hover: #fff;
 	--border: #ddd;
 	--subtle: #666;
+	--red: #ff4c4c;
+	--red2: #ff1c1c;
 }
