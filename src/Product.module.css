@@ -38,7 +38,8 @@ h2 {
 .rating {
   display: flex;
   gap: 0.25em;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  align-items: center;
 }
 
 .ratingCount {
@@ -91,4 +92,9 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
 }

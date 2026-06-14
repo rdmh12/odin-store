@@ -7,5 +7,5 @@
 	--nav-bg-hover: var(--accent);
 	--nav-fg-hover: #fff;
 	--border: #ddd;
-	--subtle: #999;
+	--subtle: #666;
 }
