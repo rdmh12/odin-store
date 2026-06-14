@@ -1,5 +1,6 @@
 :root {
 	--accent: #305cde;
+	--main-fg: #333;
 	--root-bg: #f0f2f4;
 	--header-bg: #fff;
 	--title-fg: var(--accent);

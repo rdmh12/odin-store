@@ -11,7 +11,7 @@ test("renders home page by default", () => {
 
   const heading = screen.getByRole("heading");
 
-  expect(heading.textContent).toBe("Home");
+  expect(heading.textContent).toBe("Welcome to the store!");
 });
 
 test("navigation", async () => {
@@ -31,5 +31,7 @@ test("navigation", async () => {
   expect(screen.queryByRole("heading").textContent).toBe("Your cart is empty.");
 
   await user.click(home);
-  expect(screen.queryByRole("heading").textContent).toBe("Home");
+  expect(screen.queryByRole("heading").textContent).toBe(
+    "Welcome to the store!",
+  );
 });

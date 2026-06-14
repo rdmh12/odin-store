@@ -11,7 +11,7 @@
   font-family: system-ui, sans-serif;
 }
 
-#root {
+body {
   background-color: var(--root-bg);
 }
 
@@ -31,6 +31,14 @@ header {
 main {
   margin-top: var(--header-height);
   padding: 1em;
+  color: var(--main-fg);
+}
+
+h1 {
+  text-align: center;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px solid var(--border);
 }
 
 .logo {
