@@ -5,7 +5,7 @@ export default function Checkout() {
 
   return (
     location.state?.message && (
-      <div className="content">
+      <div className="content center">
         <h2>{location.state.message}</h2>
       </div>
     )
