@@ -25,11 +25,6 @@ h2 {
   text-align: center;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-}
-
 .price {
   font-size: 1.5rem;
   font-weight: bold;
@@ -46,15 +41,11 @@ h2 {
   color: var(--subtle);
 }
 
-.addButton,
-.amountButton {
+.addButton {
   height: var(--button-height);
   display: flex;
   align-items: center;
   cursor: pointer;
-}
-
-.addButton {
   background-color: #000;
   border: 0;
   color: #fff;
@@ -65,38 +56,6 @@ h2 {
 .addButton:hover {
   background-color: #666;
   transition: background-color 250ms;
-}
-
-.amountButton {
-  background: none;
-  border: 1px solid var(--border);
-  width: var(--button-height);
-  justify-content: center;
-}
-
-.buttonIcon {
-  width: 24px;
-  height: 24px;
-}
-
-.amountButtonDecrement {
-  border-radius: var(--amount-button-radius) 0 0 var(--amount-button-radius);
-}
-
-.amountButtonIncrement {
-  border-radius: 0 var(--amount-button-radius) var(--amount-button-radius) 0;
-}
-
-.amount {
-  font-size: 1rem;
-  font-weight: 600;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  width: var(--button-height);
-  height: var(--button-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .star {

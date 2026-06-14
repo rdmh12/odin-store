@@ -2,9 +2,7 @@ import styles from "./Product.module.css";
 import starFull from "./img/star.svg";
 import starHalf from "./img/star-half.svg";
 import starEmpty from "./img/star-empty.svg";
-import trash from "./img/trash.svg";
-import minus from "./img/minus.svg";
-import plus from "./img/plus.svg";
+import AmountButtons from "./AmountButtons.jsx";
 
 export default function Product({
   product,
@@ -53,28 +51,11 @@ export default function Product({
       <h2>{product.title}</h2>
       <div className={styles.price}>{product.price.toFixed(2)}</div>
       {amount ? (
-        <div className={styles.buttons}>
-          <button
-            type="button"
-            onClick={onAmountDecreased}
-            aria-label="Decrement"
-            className={`${styles.amountButton} ${styles.amountButtonDecrement}`}
-          >
-            <img
-              src={amount == 1 ? trash : minus}
-              className={styles.buttonIcon}
-            />
-          </button>
-          <div className={styles.amount}>{amount}</div>
-          <button
-            type="button"
-            onClick={onAmountIncreased}
-            aria-label="Increment"
-            className={`${styles.amountButton} ${styles.amountButtonIncrement}`}
-          >
-            <img src={plus} className={styles.buttonIcon} />
-          </button>
-        </div>
+        <AmountButtons
+          amount={amount}
+          onAmountIncreased={onAmountIncreased}
+          onAmountDecreased={onAmountDecreased}
+        />
       ) : (
         <button
           type="button"

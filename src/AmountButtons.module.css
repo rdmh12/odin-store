@@ -1,0 +1,41 @@
+.buttons {
+  display: flex;
+  align-items: center;
+	background: #fff;
+}
+
+.amountButton {
+  height: var(--button-height);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+	background: #fff;
+  border: 1px solid var(--border);
+  width: var(--button-height);
+  justify-content: center;
+}
+
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.amountButtonDecrement {
+  border-radius: var(--amount-button-radius) 0 0 var(--amount-button-radius);
+}
+
+.amountButtonIncrement {
+  border-radius: 0 var(--amount-button-radius) var(--amount-button-radius) 0;
+}
+
+.amount {
+  font-size: 1rem;
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  width: var(--button-height);
+  height: var(--button-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
