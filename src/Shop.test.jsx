@@ -1,20 +1,17 @@
 import { test, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { createRoutesStub, Outlet } from "react-router-dom";
+import { useReducer } from "react";
 import Shop from "./Shop.jsx";
 import products from "./debug-products.js";
 import ShoppingCart from "./ShoppingCart.js";
+import shoppingCartReducer from "./shoppingCartReducer.js";
 
 test("renders products", async () => {
-  let cart = new ShoppingCart();
-  const setCart = (newCart) => {
-    cart = newCart;
-  };
-
   const Stub = createRoutesStub([
     {
       path: "/",
-      Component: () => <Outlet context={[cart, setCart]} />,
+      Component: () => <TestOutlet />,
       children: [
         {
           index: true,
@@ -33,3 +30,9 @@ test("renders products", async () => {
 
   expect(content.children.length).toBe(products.length);
 });
+
+function TestOutlet() {
+  const [cart, dispatch] = useReducer(shoppingCartReducer, new ShoppingCart());
+
+  return <Outlet context={[cart, dispatch]} />;
+}

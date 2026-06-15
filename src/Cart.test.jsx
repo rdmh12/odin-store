@@ -2,11 +2,12 @@ import { test, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRoutesStub, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useReducer } from "react";
 import Cart from "./Cart.jsx";
 import Checkout from "./Checkout.jsx";
 import products from "./debug-products.js";
 import ShoppingCart from "./ShoppingCart.js";
+import shoppingCartReducer from "./shoppingCartReducer.js";
 
 test("renders no items when cart is empty", () => {
   const Stub = createStub(new ShoppingCart());
@@ -200,9 +201,9 @@ test("checkout button shows 'Checkout completed' message", async () => {
 });
 
 function TestOutlet({ initialCart }) {
-  const [cart, setCart] = useState(initialCart);
+  const [cart, dispatch] = useReducer(shoppingCartReducer, initialCart);
 
-  return <Outlet context={[cart, setCart]} />;
+  return <Outlet context={[cart, dispatch]} />;
 }
 
 function createStub(initialCart) {

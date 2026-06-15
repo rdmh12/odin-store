@@ -1,10 +1,9 @@
 import { useOutletContext, useNavigate } from "react-router-dom";
-import ShoppingCart from "./ShoppingCart.js";
 import AmountButtons from "./AmountButtons.jsx";
 import styles from "./Cart.module.css";
 
 export default function Cart() {
-  const [cart, setCart] = useOutletContext();
+  const [cart, dispatch] = useOutletContext();
   const navigate = useNavigate();
   let content;
   let checkout;
@@ -13,29 +12,6 @@ export default function Cart() {
     content = <h2 className={styles.emptyMessage}>Your cart is empty.</h2>;
     checkout = "";
   } else {
-    const decrementHandler = (product) => {
-      const newCart = new ShoppingCart(cart);
-      newCart.decreaseAmount(product);
-      setCart(newCart);
-    };
-
-    const incrementHandler = (product) => {
-      const newCart = new ShoppingCart(cart);
-      newCart.increaseAmount(product);
-      setCart(newCart);
-    };
-
-    const removeHandler = (productId) => {
-      const newCart = new ShoppingCart(cart);
-      newCart.remove(productId);
-      setCart(newCart);
-    };
-
-    const checkoutHandler = () => {
-      setCart(new ShoppingCart());
-      navigate("/checkout", { state: { message: "Checkout completed!" } });
-    };
-
     content = (
       <div className={styles.entries}>
         {cart.map((product, amount) => (
@@ -59,12 +35,18 @@ export default function Cart() {
               <div className={styles.entryButtons}>
                 <AmountButtons
                   amount={amount}
-                  onAmountIncreased={() => incrementHandler(product)}
-                  onAmountDecreased={() => decrementHandler(product)}
+                  onAmountIncreased={() =>
+                    dispatch({ type: "increment", product })
+                  }
+                  onAmountDecreased={() =>
+                    dispatch({ type: "decrement", product })
+                  }
                 />
                 <button
                   type="button"
-                  onClick={() => removeHandler(product.id)}
+                  onClick={() =>
+                    dispatch({ type: "remove", productId: product.id })
+                  }
                   className={styles.removeButton}
                 >
                   Remove
@@ -86,7 +68,12 @@ export default function Cart() {
         </div>
         <button
           type="button"
-          onClick={checkoutHandler}
+          onClick={() => {
+            dispatch({ type: "empty" });
+            navigate("/checkout", {
+              state: { message: "Checkout completed!" },
+            });
+          }}
           className={styles.checkoutButton}
         >
           Checkout

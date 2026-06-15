@@ -1,11 +1,12 @@
 import { Outlet, Link, NavLink, useNavigation } from "react-router-dom";
-import { useState } from "react";
+import { useReducer } from "react";
 import ShoppingCartIcon from "./ShoppingCartIcon.jsx";
 import ShoppingCart from "./ShoppingCart.js";
 import progress from "./img/progress.svg";
+import shoppingCartReducer from "./shoppingCartReducer.js";
 
 export default function App() {
-  const [cart, setCart] = useState(new ShoppingCart());
+  const [cart, dispatch] = useReducer(shoppingCartReducer, new ShoppingCart());
   const navigation = useNavigation();
 
   return (
@@ -39,7 +40,7 @@ export default function App() {
             <img src={progress} alt="Loading" className="spinner" />
           </div>
         ) : (
-          <Outlet context={[cart, setCart]} />
+          <Outlet context={[cart, dispatch]} />
         )}
       </main>
     </>
